@@ -1,0 +1,50 @@
+year,fishing_entity,fishing_sector,catch_type,reporting_status,gear_type,end_use_type,tonnes,landed_value
+1950,"Albania",Industrial,Discards,Unreported,bottom trawl,,145.0013231580
+1950,"Albania",Industrial,Discards,Unreported,pelagic trawl,,0.9863122230
+1950,"Albania",Industrial,Discards,Unreported,purse seine,,0.4728285250
+1950,"Albania",Industrial,Landings,Reported,bottom trawl,Direct human consumption,742.8529325409,163762.23781512323
+1950,"Albania",Industrial,Landings,Reported,bottom trawl,Other,0.7435965291,0.17699739304808404
+1950,"Albania",Industrial,Landings,Reported,pelagic trawl,Direct human consumption,91.7104345512,22494.596186715695
+1950,"Albania",Industrial,Landings,Reported,pelagic trawl,Other,0.0918022368,0.6872348719217601
+1950,"Albania",Industrial,Landings,Reported,purse seine,Direct human consumption,47.2355696275,11520.147056909553
+1950,"Albania",Industrial,Landings,Reported,purse seine,Other,0.0472828525,0.35004002634046866
+1950,"Albania",Subsistence,Landings,Reported,subsistence fishing gear,Direct human consumption,5.8659190860,1838.0329616778822
+1950,"Albania",Artisanal,Discards,Unreported,other,,9.3636298050
+1950,"Albania",Artisanal,Landings,Reported,other,Direct human consumption,111.3686044183,34893.36850403269
+1950,"Albania",Artisanal,Landings,Reported,other,Other,0.0838582118,0.09646981053975438
+1950,"Algeria",Industrial,Discards,Unreported,bottom trawl,,4472.5575873552
+1950,"Algeria",Industrial,Discards,Unreported,purse seine,,139.1647231888
+1950,"Algeria",Industrial,Landings,Reported,bottom trawl,Direct human consumption,9478.3063655070,5667120.8625983205
+1950,"Algeria",Industrial,Landings,Reported,bottom trawl,Other,3.4535449412,4.397306764140297
+1950,"Algeria",Industrial,Landings,Reported,purse seine,Direct human consumption,10488.9885279016,5229055.131030459
+1950,"Algeria",Industrial,Landings,Reported,purse seine,Other,1.8113329106,1.4783937836989303
+1950,"Algeria",Industrial,Landings,Reported,pots or traps,Direct human consumption,100.0000000000,89100.58034
+1950,"Algeria",Industrial,Landings,Reported,unknown class,Direct human consumption,1541.3415413476,1384638.7212927614
+1950,"Algeria",Industrial,Landings,Unreported,bottom trawl,Direct human consumption,3072.2731692620,6694955.360828691
+1950,"Algeria",Industrial,Landings,Unreported,bottom trawl,Other,0.4329615941,0.5512905584642744
+1950,"Algeria",Industrial,Landings,Unreported,purse seine,Direct human consumption,1307.7643339233,651923.9234883628
+1950,"Algeria",Industrial,Landings,Unreported,purse seine,Other,0.2270490882,0.185346217620442
+1950,"Algeria",Industrial,Landings,Unreported,unknown class,Direct human consumption,1098.4325593054,657326.3176081895
+1950,"Algeria",Industrial,Landings,Unreported,unknown class,Other,0.0471684000,0.14022804986441878
+1950,"Algeria",Subsistence,Landings,Unreported,subsistence fishing gear,Direct human consumption,1344.0999999600,1529338.4303368544
+1950,"Algeria",Artisanal,Landings,Reported,cast nets,Direct human consumption,454.5651557640,363358.16582686204
+1950,"Algeria",Artisanal,Landings,Reported,bagnets,Direct human consumption,169.6135505673,143072.08963662904
+1950,"Algeria",Artisanal,Landings,Reported,small scale seine nets,Direct human consumption,875.2148769032,319347.3878967388
+1950,"Algeria",Artisanal,Landings,Reported,small scale seine nets,Other,0.5703846115,0.7659046591645607
+1950,"Algeria",Artisanal,Landings,Reported,small scale encircling nets,Direct human consumption,1346.5276007613,530545.0333943854
+1950,"Algeria",Artisanal,Landings,Reported,small scale encircling nets,Other,0.6865280884,0.7661779776341927
+1950,"Algeria",Artisanal,Landings,Reported,small scale gillnets,Direct human consumption,2349.9609725996,1610064.9834023567
+1950,"Algeria",Artisanal,Landings,Reported,small scale gillnets,Other,0.1161434769,0.00027331846963199853
+1950,"Algeria",Artisanal,Landings,Reported,small scale other nets,Direct human consumption,8.3206987400,10131.01545009418
+1950,"Algeria",Artisanal,Landings,Reported,small scale pots or traps,Direct human consumption,104.6270165450,128190.46151169023
+1950,"Algeria",Artisanal,Landings,Reported,small scale lines,Direct human consumption,376.3957626918,261364.35845962266
+1950,"Algeria",Artisanal,Landings,Unreported,cast nets,Direct human consumption,2020.6278939912,1854770.4583279614
+1950,"Algeria",Artisanal,Landings,Unreported,bagnets,Direct human consumption,85.8721867680,23478.610515762615
+1950,"Algeria",Artisanal,Landings,Unreported,small scale seine nets,Direct human consumption,1336.2762678158,629998.3231189904
+1950,"Algeria",Artisanal,Landings,Unreported,small scale seine nets,Other,0.0009403437,0.0012626806672044074
+1950,"Algeria",Artisanal,Landings,Unreported,small scale encircling nets,Direct human consumption,1397.3744173166,729017.9269520259
+1950,"Algeria",Artisanal,Landings,Unreported,small scale encircling nets,Other,0.0089896858,0.0012816230470777494
+1950,"Algeria",Artisanal,Landings,Unreported,small scale gillnets,Direct human consumption,5011.3655358951,2607276.869848157
+1950,"Algeria",Artisanal,Landings,Unreported,small scale gillnets,Other,0.0080493421,1.894237987334207e-05
+1950,"Algeria",Artisanal,Landings,Unreported,small scale other nets,Direct human consumption,75.0996093320,3953.746180013808
+1950,"Algeria",Artisanal,Landings,Unreported,small scale pots or traps,Direct human consumption,668.5488692925,253804.24393423018

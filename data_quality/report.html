@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte de Calidad de Datos - Sea Around Us</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f6fa; color: #2c3e50; padding: 30px; }
+        .header { background: linear-gradient(135deg, #2c3e50, #3498db); color: white; padding: 30px 40px; border-radius: 12px; margin-bottom: 25px; }
+        .header h1 { font-size: 28px; margin-bottom: 5px; }
+        .header p { opacity: 0.85; font-size: 14px; }
+        .summary { display: flex; gap: 15px; margin-bottom: 25px; }
+        .card { flex: 1; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); text-align: center; }
+        .card .number { font-size: 36px; font-weight: bold; }
+        .card .label { font-size: 13px; color: #7f8c8d; margin-top: 5px; }
+        .green { color: #27ae60; }
+        .red { color: #e74c3c; }
+        .orange { color: #f39c12; }
+        .blue { color: #3498db; }
+        table { width: 100%; background: white; border-collapse: collapse; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        th { background: #2c3e50; color: white; padding: 12px 15px; text-align: left; font-size: 13px; text-transform: uppercase; }
+        td { padding: 10px 15px; border-bottom: 1px solid #ecf0f1; font-size: 14px; }
+        tr:hover { background: #f8f9fa; }
+        .footer { text-align: center; margin-top: 25px; color: #95a5a6; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Reporte de Calidad de Datos</h1>
+        <p>Proyecto Final AWS Data Engineering - Sea Around Us Fisheries Dataset</p>
+        <p>Generado: 2026-05-10 22:06:10</p>
+    </div>
+
+    <div class="summary">
+        <div class="card"><div class="number blue">38</div><div class="label">Total de Validaciones</div></div>
+        <div class="card"><div class="number green">34</div><div class="label">Pasaron (PASS)</div></div>
+        <div class="card"><div class="number red">4</div><div class="label">Fallaron (FAIL)</div></div>
+        <div class="card"><div class="number orange">0</div><div class="label">Advertencias (WARN)</div></div>
+        <div class="card"><div class="number" style="color:#27ae60">89%</div><div class="label">Score Global</div></div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th><th>Regla</th><th>Severidad</th><th>Dataset</th>
+                <th>Total Filas</th><th>Pasaron</th><th>Fallaron</th><th>Estado</th><th>Detalles</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><strong>DQ-01</strong></td>
+            <td>Completitud de campos criticos</td>
+            <td><span style="background:#e74c3c;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Alta</span></td>
+            <td>global</td>
+            <td style="text-align:right">567,995</td>
+            <td style="text-align:right;color:#27ae60"><strong>567,995</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Campos evaluados: ['year', 'tonnes', 'fishing_entity']. Filas con al menos un nulo: 0</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-02</strong></td>
+            <td>Validez temporal (1950-2018)</td>
+            <td><span style="background:#e74c3c;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Alta</span></td>
+            <td>global</td>
+            <td style="text-align:right">567,995</td>
+            <td style="text-align:right;color:#27ae60"><strong>558,909</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>9,086</strong></td>
+            <td><span style="background:#e74c3c;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">FAIL</span></td>
+            <td style="font-size:13px;color:#555">Filas con year fuera de [1950, 2018]: 9,086</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-03</strong></td>
+            <td>No negatividad de tonelaje</td>
+            <td><span style="background:#e74c3c;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Alta</span></td>
+            <td>global</td>
+            <td style="text-align:right">567,995</td>
+            <td style="text-align:right;color:#27ae60"><strong>567,995</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Registros con tonnes < 0: 0</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-04</strong></td>
+            <td>No negatividad de valor economico</td>
+            <td><span style="background:#f39c12;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Media</span></td>
+            <td>global</td>
+            <td style="text-align:right">504,007</td>
+            <td style="text-align:right;color:#27ae60"><strong>504,007</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Registros con landed_value < 0 (excluyendo nulos): 0</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-05</strong></td>
+            <td>Valores validos de sector pesquero</td>
+            <td><span style="background:#f39c12;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Media</span></td>
+            <td>global</td>
+            <td style="text-align:right">567,995</td>
+            <td style="text-align:right;color:#27ae60"><strong>567,995</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Valores invalidos: Ninguno</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-06</strong></td>
+            <td>Valores validos de tipo de captura</td>
+            <td><span style="background:#f39c12;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Media</span></td>
+            <td>global</td>
+            <td style="text-align:right">567,995</td>
+            <td style="text-align:right;color:#27ae60"><strong>567,995</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Valores invalidos: Ninguno</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-07</strong></td>
+            <td>Valores validos de estado de reporte</td>
+            <td><span style="background:#f39c12;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Media</span></td>
+            <td>global</td>
+            <td style="text-align:right">567,995</td>
+            <td style="text-align:right;color:#27ae60"><strong>567,995</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Valores invalidos: Ninguno</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-08</strong></td>
+            <td>Consistencia captura vs uso final</td>
+            <td><span style="background:#3498db;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Baja</span></td>
+            <td>global</td>
+            <td style="text-align:right">567,995</td>
+            <td style="text-align:right;color:#27ae60"><strong>567,995</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Registros con Discards + Direct human consumption (contradiccion): 0</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-09</strong></td>
+            <td>Unicidad de registros</td>
+            <td><span style="background:#f39c12;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Media</span></td>
+            <td>global</td>
+            <td style="text-align:right">567,995</td>
+            <td style="text-align:right;color:#27ae60"><strong>567,995</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Filas completamente duplicadas: 0</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-01</strong></td>
+            <td>Completitud de campos criticos</td>
+            <td><span style="background:#e74c3c;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Alta</span></td>
+            <td>eez</td>
+            <td style="text-align:right">480,958</td>
+            <td style="text-align:right;color:#27ae60"><strong>480,958</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Campos evaluados: ['year', 'tonnes', 'fishing_entity']. Filas con al menos un nulo: 0</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-02</strong></td>
+            <td>Validez temporal (1950-2018)</td>
+            <td><span style="background:#e74c3c;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Alta</span></td>
+            <td>eez</td>
+            <td style="text-align:right">480,958</td>
+            <td style="text-align:right;color:#27ae60"><strong>470,894</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>10,064</strong></td>
+            <td><span style="background:#e74c3c;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">FAIL</span></td>
+            <td style="font-size:13px;color:#555">Filas con year fuera de [1950, 2018]: 10,064</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-03</strong></td>
+            <td>No negatividad de tonelaje</td>
+            <td><span style="background:#e74c3c;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Alta</span></td>
+            <td>eez</td>
+            <td style="text-align:right">480,958</td>
+            <td style="text-align:right;color:#27ae60"><strong>480,958</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Registros con tonnes < 0: 0</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-04</strong></td>
+            <td>No negatividad de valor economico</td>
+            <td><span style="background:#f39c12;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Media</span></td>
+            <td>eez</td>
+            <td style="text-align:right">428,958</td>
+            <td style="text-align:right;color:#27ae60"><strong>428,958</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Registros con landed_value < 0 (excluyendo nulos): 0</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-05</strong></td>
+            <td>Valores validos de sector pesquero</td>
+            <td><span style="background:#f39c12;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Media</span></td>
+            <td>eez</td>
+            <td style="text-align:right">480,958</td>
+            <td style="text-align:right;color:#27ae60"><strong>480,958</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Valores invalidos: Ninguno</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-06</strong></td>
+            <td>Valores validos de tipo de captura</td>
+            <td><span style="background:#f39c12;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Media</span></td>
+            <td>eez</td>
+            <td style="text-align:right">480,958</td>
+            <td style="text-align:right;color:#27ae60"><strong>480,958</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Valores invalidos: Ninguno</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-07</strong></td>
+            <td>Valores validos de estado de reporte</td>
+            <td><span style="background:#f39c12;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Media</span></td>
+            <td>eez</td>
+            <td style="text-align:right">480,958</td>
+            <td style="text-align:right;color:#27ae60"><strong>480,958</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Valores invalidos: Ninguno</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-08</strong></td>
+            <td>Consistencia captura vs uso final</td>
+            <td><span style="background:#3498db;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Baja</span></td>
+            <td>eez</td>
+            <td style="text-align:right">480,958</td>
+            <td style="text-align:right;color:#27ae60"><strong>480,958</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Registros con Discards + Direct human consumption (contradiccion): 0</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-09</strong></td>
+            <td>Unicidad de registros</td>
+            <td><span style="background:#f39c12;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Media</span></td>
+            <td>eez</td>
+            <td style="text-align:right">480,958</td>
+            <td style="text-align:right;color:#27ae60"><strong>480,958</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Filas completamente duplicadas: 0</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-01</strong></td>
+            <td>Completitud de campos criticos</td>
+            <td><span style="background:#e74c3c;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Alta</span></td>
+            <td>high_seas</td>
+            <td style="text-align:right">25,349</td>
+            <td style="text-align:right;color:#27ae60"><strong>25,349</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Campos evaluados: ['year', 'tonnes', 'fishing_entity']. Filas con al menos un nulo: 0</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-02</strong></td>
+            <td>Validez temporal (1950-2018)</td>
+            <td><span style="background:#e74c3c;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Alta</span></td>
+            <td>high_seas</td>
+            <td style="text-align:right">25,349</td>
+            <td style="text-align:right;color:#27ae60"><strong>24,591</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>758</strong></td>
+            <td><span style="background:#e74c3c;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">FAIL</span></td>
+            <td style="font-size:13px;color:#555">Filas con year fuera de [1950, 2018]: 758</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-03</strong></td>
+            <td>No negatividad de tonelaje</td>
+            <td><span style="background:#e74c3c;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Alta</span></td>
+            <td>high_seas</td>
+            <td style="text-align:right">25,349</td>
+            <td style="text-align:right;color:#27ae60"><strong>25,349</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Registros con tonnes < 0: 0</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-04</strong></td>
+            <td>No negatividad de valor economico</td>
+            <td><span style="background:#f39c12;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Media</span></td>
+            <td>high_seas</td>
+            <td style="text-align:right">22,611</td>
+            <td style="text-align:right;color:#27ae60"><strong>22,611</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Registros con landed_value < 0 (excluyendo nulos): 0</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-05</strong></td>
+            <td>Valores validos de sector pesquero</td>
+            <td><span style="background:#f39c12;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Media</span></td>
+            <td>high_seas</td>
+            <td style="text-align:right">25,349</td>
+            <td style="text-align:right;color:#27ae60"><strong>25,349</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Valores invalidos: Ninguno</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-06</strong></td>
+            <td>Valores validos de tipo de captura</td>
+            <td><span style="background:#f39c12;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Media</span></td>
+            <td>high_seas</td>
+            <td style="text-align:right">25,349</td>
+            <td style="text-align:right;color:#27ae60"><strong>25,349</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Valores invalidos: Ninguno</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-07</strong></td>
+            <td>Valores validos de estado de reporte</td>
+            <td><span style="background:#f39c12;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Media</span></td>
+            <td>high_seas</td>
+            <td style="text-align:right">25,349</td>
+            <td style="text-align:right;color:#27ae60"><strong>25,349</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Valores invalidos: Ninguno</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-08</strong></td>
+            <td>Consistencia captura vs uso final</td>
+            <td><span style="background:#3498db;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Baja</span></td>
+            <td>high_seas</td>
+            <td style="text-align:right">25,349</td>
+            <td style="text-align:right;color:#27ae60"><strong>25,349</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Registros con Discards + Direct human consumption (contradiccion): 0</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-09</strong></td>
+            <td>Unicidad de registros</td>
+            <td><span style="background:#f39c12;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Media</span></td>
+            <td>high_seas</td>
+            <td style="text-align:right">25,349</td>
+            <td style="text-align:right;color:#27ae60"><strong>25,349</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Filas completamente duplicadas: 0</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-01</strong></td>
+            <td>Completitud de campos criticos</td>
+            <td><span style="background:#e74c3c;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Alta</span></td>
+            <td>fishing_entity</td>
+            <td style="text-align:right">791,496</td>
+            <td style="text-align:right;color:#27ae60"><strong>791,496</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Campos evaluados: ['year', 'tonnes']. Filas con al menos un nulo: 0</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-02</strong></td>
+            <td>Validez temporal (1950-2018)</td>
+            <td><span style="background:#e74c3c;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Alta</span></td>
+            <td>fishing_entity</td>
+            <td style="text-align:right">791,496</td>
+            <td style="text-align:right;color:#27ae60"><strong>766,459</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>25,037</strong></td>
+            <td><span style="background:#e74c3c;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">FAIL</span></td>
+            <td style="font-size:13px;color:#555">Filas con year fuera de [1950, 2018]: 25,037</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-03</strong></td>
+            <td>No negatividad de tonelaje</td>
+            <td><span style="background:#e74c3c;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Alta</span></td>
+            <td>fishing_entity</td>
+            <td style="text-align:right">791,496</td>
+            <td style="text-align:right;color:#27ae60"><strong>791,496</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Registros con tonnes < 0: 0</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-04</strong></td>
+            <td>No negatividad de valor economico</td>
+            <td><span style="background:#f39c12;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Media</span></td>
+            <td>fishing_entity</td>
+            <td style="text-align:right">715,887</td>
+            <td style="text-align:right;color:#27ae60"><strong>715,887</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Registros con landed_value < 0 (excluyendo nulos): 0</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-05</strong></td>
+            <td>Valores validos de sector pesquero</td>
+            <td><span style="background:#f39c12;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Media</span></td>
+            <td>fishing_entity</td>
+            <td style="text-align:right">791,496</td>
+            <td style="text-align:right;color:#27ae60"><strong>791,496</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Valores invalidos: Ninguno</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-06</strong></td>
+            <td>Valores validos de tipo de captura</td>
+            <td><span style="background:#f39c12;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Media</span></td>
+            <td>fishing_entity</td>
+            <td style="text-align:right">791,496</td>
+            <td style="text-align:right;color:#27ae60"><strong>791,496</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Valores invalidos: Ninguno</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-07</strong></td>
+            <td>Valores validos de estado de reporte</td>
+            <td><span style="background:#f39c12;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Media</span></td>
+            <td>fishing_entity</td>
+            <td style="text-align:right">791,496</td>
+            <td style="text-align:right;color:#27ae60"><strong>791,496</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Valores invalidos: Ninguno</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-08</strong></td>
+            <td>Consistencia captura vs uso final</td>
+            <td><span style="background:#3498db;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Baja</span></td>
+            <td>fishing_entity</td>
+            <td style="text-align:right">791,496</td>
+            <td style="text-align:right;color:#27ae60"><strong>791,496</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Registros con Discards + Direct human consumption (contradiccion): 0</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-09</strong></td>
+            <td>Unicidad de registros</td>
+            <td><span style="background:#f39c12;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Media</span></td>
+            <td>fishing_entity</td>
+            <td style="text-align:right">791,496</td>
+            <td style="text-align:right;color:#27ae60"><strong>791,496</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">Filas completamente duplicadas: 0</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-10</strong></td>
+            <td>Integridad referencial (eez vs global)</td>
+            <td><span style="background:#e74c3c;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Alta</span></td>
+            <td>eez</td>
+            <td style="text-align:right">35</td>
+            <td style="text-align:right;color:#27ae60"><strong>35</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">35/35 entidades encontradas en global (100.0%)</td>
+        </tr>
+        <tr>
+            <td><strong>DQ-10</strong></td>
+            <td>Integridad referencial (high_seas vs global)</td>
+            <td><span style="background:#e74c3c;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Alta</span></td>
+            <td>high_seas</td>
+            <td style="text-align:right">62</td>
+            <td style="text-align:right;color:#27ae60"><strong>62</strong></td>
+            <td style="text-align:right;color:#e74c3c"><strong>0</strong></td>
+            <td><span style="background:#27ae60;color:white;padding:4px 12px;border-radius:4px;font-weight:bold">PASS</span></td>
+            <td style="font-size:13px;color:#555">62/62 entidades encontradas en global (100.0%)</td>
+        </tr></tbody>
+    </table>
+
+    <div class="footer">
+        <p>Data Quality Report | AWS Academy Data Engineering Capstone | Rol 2: Data Quality Engineer</p>
+    </div>
+</body>
+</html>

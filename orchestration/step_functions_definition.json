@@ -1,0 +1,122 @@
+{
+  "Comment": "AWS Step Functions - Pipeline Orquestado de Data Engineering",
+  "StartAt": "StartGlueJob",
+  "States": {
+    "StartGlueJob": {
+      "Type": "Task",
+      "Comment": "Ejecuta el Glue Job que transforma CSV a Parquet particionado por year",
+      "Resource": "arn:aws:states:::glue:startJobRun.sync",
+      "Parameters": {
+        "JobName": "transform-fisheries"
+      },
+      "ResultPath": "$.GlueJobResult",
+      "Next": "StartCrawler",
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "GlueJobFailed",
+          "ResultPath": "$.error"
+        }
+      ]
+    },
+
+    "StartCrawler": {
+      "Type": "Task",
+      "Comment": "Ejecuta el Crawler para actualizar el catálogo de Glue con las tablas Parquet",
+      "Resource": "arn:aws:states:::aws-sdk:glue:startCrawler",
+      "Parameters": {
+        "Name": "fisheries-crawler_gang"
+      },
+      "ResultPath": "$.CrawlerResult",
+      "Next": "WaitForCrawler",
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "CrawlerFailed",
+          "ResultPath": "$.error"
+        }
+      ]
+    },
+
+    "WaitForCrawler": {
+      "Type": "Wait",
+      "Comment": "Espera 60 segundos para que el Crawler termine de catalogar las tablas",
+      "Seconds": 60,
+      "Next": "CheckCrawlerStatus"
+    },
+
+    "CheckCrawlerStatus": {
+      "Type": "Task",
+      "Comment": "Verifica si el Crawler terminó de ejecutarse",
+      "Resource": "arn:aws:states:::aws-sdk:glue:getCrawler",
+      "Parameters": {
+        "Name": "fisheries-crawler_gang"
+      },
+      "ResultPath": "$.CrawlerStatus",
+      "Next": "IsCrawlerDone"
+    },
+
+    "IsCrawlerDone": {
+      "Type": "Choice",
+      "Comment": "Evalúa si el Crawler ya terminó o si hay que seguir esperando",
+      "Choices": [
+        {
+          "Variable": "$.CrawlerStatus.Crawler.State",
+          "StringEquals": "READY",
+          "Next": "RunAthenaValidation"
+        },
+        {
+          "Variable": "$.CrawlerStatus.Crawler.State",
+          "StringEquals": "STOPPING",
+          "Next": "WaitForCrawler"
+        }
+      ],
+      "Default": "WaitForCrawler"
+    },
+
+    "RunAthenaValidation": {
+      "Type": "Task",
+      "Comment": "Ejecuta una query de validación en Athena para confirmar que los datos están disponibles",
+      "Resource": "arn:aws:states:::athena:startQueryExecution.sync",
+      "Parameters": {
+        "QueryString": "SELECT COUNT(*) AS total_rows FROM global_processed LIMIT 1",
+        "WorkGroup": "primary",
+        "QueryExecutionContext": {
+          "Database": "fisheries_db_diego"
+        }
+      },
+      "ResultPath": "$.AthenaResult",
+      "Next": "PipelineCompleted",
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "AthenaFailed",
+          "ResultPath": "$.error"
+        }
+      ]
+    },
+
+    "PipelineCompleted": {
+      "Type": "Succeed",
+      "Comment": "El pipeline se ejecutó exitosamente de principio a fin"
+    },
+
+    "GlueJobFailed": {
+      "Type": "Fail",
+      "Error": "GlueJobError",
+      "Cause": "El Glue Job de transformación CSV->Parquet falló. Verificar logs en CloudWatch."
+    },
+
+    "CrawlerFailed": {
+      "Type": "Fail",
+      "Error": "CrawlerError",
+      "Cause": "El Crawler de Glue falló al catalogar las tablas. Verificar permisos del rol y la ruta de S3."
+    },
+
+    "AthenaFailed": {
+      "Type": "Fail",
+      "Error": "AthenaError",
+      "Cause": "La validación en Athena falló. Verificar que la base de datos y las tablas existan en el catálogo."
+    }
+  }
+}

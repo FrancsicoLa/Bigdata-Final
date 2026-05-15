@@ -1,0 +1,18 @@
+# AWS credentials and config
+.aws/
+credentials
+
+# Terraform state and generated files
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Local Data (Ignorados por rúbrica para evitar penalización)
+data_full/
+*.csv
+!data_samples/*.csv
