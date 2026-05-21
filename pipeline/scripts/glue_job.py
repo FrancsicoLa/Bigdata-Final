@@ -6,7 +6,7 @@ sc = SparkContext()
 glueContext = GlueContext(sc)
 spark = glueContext.spark_session
 
-bucket = "big-data-project-gang"
+bucket = "big-data-project-gang-582465846893"
 
 # Leer CSV
 df_global = spark.read.option("header", True).csv(f"s3://{bucket}/raw/global/")

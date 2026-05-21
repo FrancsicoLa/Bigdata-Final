@@ -81,7 +81,7 @@ resource "aws_glue_job" "transform_job" {
   role_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/GlueCrawlerRole"
 
   command {
-    script_location = "s3://${var.bucket_name}/scripts/glue_job.py"
+    script_location = "s3://${aws_s3_bucket.data_lake.bucket}/scripts/glue_job.py"
     python_version  = "3"
   }
 
@@ -97,7 +97,7 @@ resource "aws_glue_crawler" "crawler" {
   database_name = aws_glue_catalog_database.db.name
 
   s3_target {
-    path = "s3://${var.bucket_name}/processed/"
+    path = "s3://${aws_s3_bucket.data_lake.bucket}/processed/"
   }
 
   depends_on = [aws_glue_job.transform_job]

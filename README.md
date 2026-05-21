@@ -1,124 +1,85 @@
-# AWS Data Engineering Capstone - Team XX
+# 🐟 AWS Data Engineering Capstone - Sea Around Us
 
-## Visión General
-Este repositorio contiene el código y la documentación de nuestro Proyecto Final (Ruta A) para el curso de AWS Academy Data Engineering. 
-El objetivo del proyecto es procesar datos globales de pesca marítima (Sea Around Us) diseñando, implementando y operando una tubería de datos (Data Pipeline) de extremo a extremo en AWS utilizando S3, AWS Glue, Athena y Amazon QuickSight.
+## 📊 Visión General
+Este repositorio contiene el código fuente y la documentación de nuestro Proyecto Final (Ruta A) para el curso de AWS Academy Data Engineering. 
+El objetivo del proyecto es procesar datos globales de pesca marítima (Sea Around Us) diseñando, implementando y operando una tubería de datos (Data Pipeline) automatizada de extremo a extremo en AWS utilizando **Amazon S3, AWS Glue, Amazon Athena y Amazon QuickSight**.
 
-## 🏗️ Arquitectura
-![Arquitectura del Proyecto](docs/architecture.png)
+---
+
+## 🏗️ Arquitectura del Proyecto
+![Arquitectura del Proyecto](orchestration/architecture.png)
+
+Nuestro Data Lake está dividido en 3 zonas (Raw, Processed, Curated). Toda la infraestructura está definida como código (IaC) mediante **Terraform**. El procesamiento de los datos crudos a formato **Parquet particionado** se realiza mediante un cluster de **PySpark** en AWS Glue, lo cual optimizó nuestros costos de escaneo en Athena en más de un 99%.
+
+---
 
 ## 👥 Miembros del Equipo y Roles
 
-| Nombre | Rol | Responsabilidad Principal |
+| Nombre | Rol | Aportación y Responsabilidad Principal |
 | :--- | :--- | :--- |
-| **[Nombre 1]** | **Rol 1: Data Engineer** | Ingesta de datos, transformación CSV→Parquet, Glue Crawler |
-| **[Nombre 2]** | **Rol 2: Data Quality Engineer** | 10 reglas de validación, reporte de calidad HTML |
-| **[Nombre 3]** | **Rol 3: Analytics Engineer** | 5 vistas SQL en Athena, benchmark, dashboard QuickSight |
-| **[Nombre 4]** | **Rol 4: Orchestration & Ops** | Step Functions, seguridad IAM, diagrama de arquitectura |
+| **Diego** | **Rol 1: Data Engineer** | Ingesta a S3 automatizada, Transformación PySpark (CSV a Parquet), Particionamiento por año, Configuración del Glue Crawler. |
+| **Ángela** | **Rol 2: Data Quality Engineer** | Implementación de 10 reglas estrictas de validación de negocio usando Pandas, descubrimiento de registros duplicados de origen, y generación de reporte HTML automatizado. |
+| **Daniela** | **Rol 3: Analytics Engineer** | Justificación del particionamiento, Benchmark de rendimiento comparativo (CSV vs Parquet), Vistas SQL avanzadas en Athena y construcción del Dashboard interactivo en QuickSight. |
+| **Francisco** | **Rol 4: Orchestration & Ops** | **Líder de Integración:** Diseño de máquina de estados (Step Functions), desarrollo de Script Bot en Python para ejecución *End-to-End* desatendida, diseño del diagrama arquitectónico, protección del repositorio (.gitignore) y gobierno de seguridad IAM. |
 
-## 📊 Dataset
-- **Fuente:** [Sea Around Us](https://www.seaaroundus.org/) - Datos de pesca marítima global (1950–2018)
-- **Archivos utilizados:**
-  - `global.csv` — Captura pesquera global (~568K filas)
-  - `eez.csv` — Zonas Económicas Exclusivas (~481K filas)
-  - `high_seas.csv` — Alta Mar (~25K filas)
-  - `fishing_entity.csv` — Entidades pesqueras por país (~791K filas) *(4to archivo adicional)*
-- **Total:** ~1.87 millones de registros
+---
 
-## 📁 Estructura del Repositorio
+## 📂 Estructura del Repositorio
 
-```
-data-eng-project-teamXX/
-├── README.md                           # Este archivo
-├── .gitignore                          # Protege credenciales y datos pesados
-├── docs/
-│   ├── architecture.png                # Diagrama de arquitectura AWS
-│   └── technical_decisions.md          # ADRs: por qué Parquet, partición por year, etc.
+```text
+data-eng-project-team01/
+├── README.md                           # Documentación principal
+├── .gitignore                          # Protección de credenciales AWS y datos pesados
 ├── pipeline/                           # Rol 1: Data Engineer
-│   ├── scripts/
-│   │   └── glue_job.py                 # PySpark: CSV → Parquet particionado por year
-│   └── terraform/
-│       ├── main.tf                     # Infraestructura como código (S3, Glue, Crawler)
-│       └── variables.tf                # Variables de configuración
+│   ├── scripts/glue_job.py             # Código PySpark: limpieza y conversión a Parquet
+│   └── terraform/                      # Infraestructura como Código (S3, Glue Job, Crawler)
+│       ├── main.tf 
+│       └── variables.tf
 ├── data_quality/                       # Rol 2: Data Quality Engineer
-│   ├── validate_quality.py             # Script de validación con 10 reglas
-│   ├── rules.md                        # Documentación de las 10 reglas con justificación
-│   └── report.html                     # Reporte ejecutado con resultados reales
+│   ├── validate_quality.py             # Script con 10 reglas de calidad
+│   └── report.html                     # Reporte de resultados PASS/FAIL
 ├── analytics/                          # Rol 3: Analytics Engineer
-│   ├── view_01_top10_countries.sql     # Top 10 países pesqueros
-│   ├── view_02_catch_trend.sql         # Tendencia de captura por año
-│   ├── view_03_sector_reporting.sql    # Industrial vs Artesanal
-│   ├── view_04_top_species.sql         # Top 15 especies en alta mar
-│   ├── view_05_eez_by_decade.sql       # Captura por zona EEZ y década
-│   ├── benchmark_queries.sql           # 3 queries para comparar CSV vs Parquet
-│   ├── benchmark.md                    # Tabla comparativa de rendimiento
-│   └── dashboard.md                    # Descripción de las 4 visualizaciones
+│   ├── benchmark.md                    # Análisis de costos/tiempos y resultados de queries
+│   └── dashboard.md                    # Documentación del Dashboard en QuickSight
 ├── orchestration/                      # Rol 4: Orchestration & Ops
-│   ├── step_functions_definition.json  # AWS Step Functions (orquestación)
-│   ├── run_pipeline.sh                 # Script bash alternativo
-│   ├── architecture.png                # Diagrama de arquitectura
-│   └── security.md                     # Políticas de seguridad y acceso
-├── data_samples/                       # Muestras pequeñas de los CSV (50 filas c/u)
-│   ├── global.csv
-│   ├── eez.csv
-│   ├── high_seas.csv
-│   └── fishing_entity.csv
+│   ├── auto_execute.py                 # Bot maestro: Orquestador Python de extremo a extremo
+│   ├── step_functions_definition.json  # Máquina de estados oficial (AWS Step Functions)
+│   ├── security.md                     # Políticas IAM y control de accesos
+│   └── architecture.png                # Diagrama visual
 └── presentation/
-    └── slides.pdf                      # (Por agregar antes de la presentación)
+    ├── slides.html                     # Presentación del equipo
+    └── guion_diapositivas.md           # Guion exacto de la defensa oral
 ```
 
-## 🚀 Cómo Ejecutar el Proyecto
+---
 
-### Prerrequisitos
-- Cuenta de AWS con permisos de `PowerUserAccess`
-- [Terraform](https://www.terraform.io/downloads) instalado
-- [AWS CLI](https://aws.amazon.com/cli/) configurado con credenciales válidas
-- Python 3.8+ con `pandas` instalado
+## 🚀 Cómo Ejecutar el Proyecto (End-to-End)
 
-### Paso 1: Crear la infraestructura (Rol 1)
+El objetivo principal de nuestro pipeline es que corra **sin intervención manual**. Hemos logrado automatizar el despliegue de infraestructura y el procesamiento lógico.
+
+### Paso 1: Desplegar la Infraestructura (Rol 1 & 4)
+Para crear el Data Lake, configurar los roles IAM y preparar los servicios de AWS Glue:
 ```bash
 cd pipeline/terraform
 terraform init
-terraform apply    # Escribe "yes" cuando lo pida
+terraform apply -auto-approve
 ```
-Esto crea el bucket S3, sube los 4 CSV, configura el Glue Job y el Crawler.
 
-### Paso 2: Ejecutar el pipeline completo (Rol 4)
-**Opción A — AWS Step Functions (recomendado):**
-1. Ir a la consola de AWS Step Functions.
-2. Crear una nueva State Machine con el contenido de `orchestration/step_functions_definition.json`.
-3. Ejecutar la State Machine.
-
-**Opción B — Script bash:**
+### Paso 2: Ejecutar el Orquestador Automatizado (Rol 4)
+Para correr el pipeline completo de procesamiento sin tocar la consola de AWS:
 ```bash
-chmod +x orchestration/run_pipeline.sh
-./orchestration/run_pipeline.sh
+cd ../..
+python orchestration/auto_execute.py
 ```
+**¿Qué hace este Bot de Python?**
+1. **Activa el Glue Job:** Inicia la transformación de casi 2 millones de filas (CSV a Parquet particionado).
+2. **Monitoreo:** Entra en un ciclo de espera (Wait State) manejando posibles errores (`FAILED`).
+3. **Catálogo:** Una vez finalizado el Job, activa el Glue Crawler para inferir el esquema (Schema-on-Read).
+4. **Validación y Benchmark:** Lanza automáticamente 6 consultas SQL hacia Amazon Athena comparando la velocidad de los CSV vs Parquet, imprimiendo el ahorro del 99% directamente en la terminal.
 
-### Paso 3: Validar calidad de datos (Rol 2)
-```bash
-pip install pandas
-python data_quality/validate_quality.py
-```
-Genera `data_quality/report.html` con los resultados.
+---
 
-### Paso 4: Ejecutar queries en Athena (Rol 3)
-1. Ir a Amazon Athena en la consola de AWS.
-2. Seleccionar la base de datos `fisheries_db_diego`.
-3. Copiar y ejecutar las queries de `analytics/benchmark_queries.sql`.
-4. Crear las vistas con los archivos `view_*.sql`.
-
-### Paso 5: Crear dashboard en QuickSight (Rol 3)
-Seguir las instrucciones en `analytics/dashboard.md`.
-
-## 🔐 Seguridad
-- No se exponen credenciales en el repositorio (protegido por `.gitignore`).
-- Se utiliza el rol `GlueCrawlerRole` para servicios de AWS Glue.
-- Los usuarios del equipo tienen `PowerUserAccess` (sin permisos de IAM).
-- Ver detalles completos en `orchestration/security.md`.
-
-## 📄 Decisiones Técnicas
-Ver `docs/technical_decisions.md` para la justificación de:
-- Uso de formato Parquet
-- Particionamiento por columna `year`
-- Elección de herramientas de orquestación
+## 🔒 Seguridad y Gobernanza
+- **Protección de Secretos:** Implementamos un archivo `.gitignore` robusto que impide la exposición de la carpeta `.aws/credentials` y los archivos locales de Terraform (`.tfstate`).
+- **Mínimo Privilegio:** Todos los miembros del equipo operan con la política `PowerUserAccess` y los servicios interactúan exclusivamente mediante el rol dedicado `GlueCrawlerRole`.
+- Detalles completos en `orchestration/security.md`.
